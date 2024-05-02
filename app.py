@@ -18,14 +18,14 @@ def pdf_to_txt(pdf_file):
 
 def url_to_txt(url):
     if 'youtube.com' in url:
-        video_id = url.split('=')[-1]  # extract the video ID from the URL
+        video_id = url.split('=')[-1]  
         transcript = YouTubeTranscriptApi.get_transcript(video_id)
-        text = ' '.join([t['text'] for t in transcript])  # concatenate all the text segments
+        text = ' '.join([t['text'] for t in transcript]) 
     else:
         response = requests.get(url)
         soup = BeautifulSoup(response.text, 'html.parser')
-        paragraphs = soup.select('p')  # select all <p> elements
-        text = '\n'.join(p.get_text() for p in paragraphs)  # get the text from each <p> element
+        paragraphs = soup.select('p')  
+        text = '\n'.join(p.get_text() for p in paragraphs)  
     return text
 
 def convert():
@@ -52,14 +52,14 @@ def convert():
             f.write(text)
 
         messagebox.showinfo("Success", f"Text successfully written to {output_file}")
-        entry.delete(0, tk.END)  # Clear the entry field
+        entry.delete(0, tk.END) 
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
 root = tk.Tk()
 root.title("Text Converter")
-root.geometry("500x200")  # Set window size
-root.configure(bg='black')  # Set background color
+root.geometry("500x200")  
+root.configure(bg='black')  
 
 frame = tk.Frame(root, bg='black')
 frame.pack(padx=10, pady=10)
